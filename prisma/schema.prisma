@@ -1,0 +1,160 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Negocios {
+  id_negocio           Int              @id @default(autoincrement())
+  nombre               String
+  propietario          String
+  direccion            String?
+  telefono             String?
+  estatus              Boolean          @default(true)
+  id_categoria_negocio Int
+  productos            Productos[]
+  ventas               Ventas[]
+  usuarios             Usuarios[]
+  categoriaNegocio     CategoriaNegocio @relation(fields: [id_categoria_negocio], references: [id_categoria_negocio])
+  createdAt            DateTime         @default(now()) // Fecha de creación
+  updatedAt            DateTime         @updatedAt // Fecha de actualización automática
+
+  @@index([nombre])
+  @@index([propietario])
+}
+
+model CategoriaNegocio {
+  id_categoria_negocio Int        @id @default(autoincrement())
+  nombre               String     @unique
+  negocios             Negocios[]
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
+}
+
+model Productos {
+  id_producto           Int                  @id @default(autoincrement())
+  nombre                String
+  descripcion           String
+  sku                   String?              @unique
+  precio                Float
+  stock                 Float
+  tipo_unidad           String
+  estatus               Boolean              @default(true)
+  fecha_expiracion      DateTime?
+  id_negocio            Int
+  createdBy             Int? // Usuario que creó el producto (opcional)
+  id_categoria_producto Int
+  detalles              DetalleVentas[]
+  recepciones           RecepcionProductos[]
+  negocio               Negocios             @relation(fields: [id_negocio], references: [id_negocio])
+  usuario               Usuarios?            @relation(fields: [createdBy], references: [id_usuario]) // Relación opcional
+  categoriaProducto     CategoriaProducto    @relation(fields: [id_categoria_producto], references: [id_categoria_producto])
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+
+  @@index([nombre])
+}
+
+model CategoriaProducto {
+  id_categoria_producto Int         @id @default(autoincrement())
+  nombre                String      @unique
+  productos             Productos[]
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+
+  @@index([nombre])
+}
+
+model Proveedores {
+  id_proveedor Int                  @id @default(autoincrement())
+  nombre       String               @unique
+  ruc          String               @unique
+  contacto     String?
+  telefono     String?
+  direccion    String?
+  recepciones  RecepcionProductos[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+}
+
+model RecepcionProductos {
+  id_recepcion  Int          @id @default(autoincrement())
+  id_producto   Int
+  cantidad      Float
+  precio_compra Float
+  id_proveedor  Int
+  id_usuario    Int
+  fecha         DateTime     @default(now())
+  producto      Productos    @relation(fields: [id_producto], references: [id_producto])
+  proveedor     Proveedores? @relation(fields: [id_proveedor], references: [id_proveedor])
+  usuario       Usuarios     @relation(fields: [id_usuario], references: [id_usuario])
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([fecha])
+  @@index([id_proveedor])
+  @@index([id_usuario])
+}
+
+model Ventas {
+  id_venta    Int             @id @default(autoincrement())
+  fecha       DateTime        @default(now())
+  metodo_pago String
+  total       Float
+  id_negocio  Int
+  id_usuario  Int
+  negocio     Negocios        @relation(fields: [id_negocio], references: [id_negocio])
+  usuario     Usuarios        @relation(fields: [id_usuario], references: [id_usuario])
+  detalles    DetalleVentas[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([fecha])
+  @@index([id_usuario])
+}
+
+model DetalleVentas {
+  id_detalle      Int       @id @default(autoincrement())
+  id_venta        Int
+  id_producto     Int
+  cantidad        Float
+  precio_unitario Float
+  subtotal        Float
+  venta           Ventas    @relation(fields: [id_venta], references: [id_venta])
+  producto        Productos @relation(fields: [id_producto], references: [id_producto])
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+enum Role {
+  ROOT
+  ADMIN
+  USER
+}
+
+model Usuarios {
+  id_usuario         Int                  @id @default(autoincrement())
+  nombre             String
+  email              String               @unique
+  password           String
+  id_negocio         Int
+  role               Role                 @default(USER)
+  estatus            Boolean              @default(true)
+  negocio            Negocios             @relation(fields: [id_negocio], references: [id_negocio])
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  Productos          Productos[]
+  Ventas             Ventas[]
+  RecepcionProductos RecepcionProductos[]
+
+  @@index([nombre])
+}

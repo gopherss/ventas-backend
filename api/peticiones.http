@@ -1,0 +1,278 @@
+### Registro de Usuario Root, cuando el usuario root se añade el negocio se va crear automaticamente
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "nombre": "Root Sandro",
+  "email": "root@negocio.com",
+  "password": "root123",
+  "role": "ROOT",
+  "estado": true
+}
+
+### Login Usuario Root
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "root@negocio.com",
+  "password": "root123"
+}
+
+### Registro de Usuario Admin
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "nombre": "Admin User",
+  "email": "admin@negocio.com",
+  "password": "admin123",
+  "role": "ADMIN",
+  "id_negocio": 2
+}
+
+### Login Usuario Admin
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@negocio.com",
+  "password": "admin123"
+}
+
+### Registro de Usuario User
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "nombre": "Empleado",
+  "email": "empleado@negocio.com",
+  "password": "empleado123",
+  "role": "USER",
+  "id_negocio": 2
+}
+
+### Login Usuario Empleado o user
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "empleado@negocio.com",
+  "password": "empleado123"
+}
+
+###  Obtiene el perfil del usuario autenticado.
+GET http://localhost:3000/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTkwMzI3LCJleHAiOjE3MzkwNzY3Mjd9.m2nAVxmkDladqPs566YA8WNbn0CNB3RTfqUmFjRcaso
+Content-Type: application/json
+
+###  Obtiene todos los perfiles de usuarios.
+GET http://localhost:3000/auth/list-users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MDY0Njk5LCJleHAiOjE3MzkxNTEwOTl9.yh544BWsszn2C3tp4MIEEb0708szojMDVPPHVCQhGm0
+Content-Type: application/json
+
+
+### Permite actualizar el perfil del usuario autenticado.
+PUT http://localhost:3000/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTkwMzI3LCJleHAiOjE3MzkwNzY3Mjd9.m2nAVxmkDladqPs566YA8WNbn0CNB3RTfqUmFjRcaso
+{
+  "nombre": "Juan Pérez Modificado",
+  "email": "nuevoemail@example.com",
+  "password": "NuevoPasswordSeguro123"
+}
+
+### crear una categoría de negocio:
+POST http://localhost:3000/negocios/categoria
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Content-Type: application/json
+
+{
+  "nombre": "Farmacia"
+}
+
+### obtener todas las categorías de negocio:
+GET http://localhost:3000/negocios/categoria
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Content-Type: application/json
+
+
+### actualizar una categoría de negocio:
+PUT http://localhost:3000/negocios/categoria/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Content-Type: application/json
+
+{
+  "nombre": "Farmacia Salud"
+}
+
+### Registrar un nuevo Negocio
+POST http://localhost:3000/negocios
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Content-Type: application/json
+
+{
+  "nombre": "Botica Curaciones",
+  "propietario": "Juan Pérez",
+  "direccion": "Av. Las Curaciones 123",
+  "telefono": "987654321",
+  "estatus": true,
+  "id_categoria_negocio": 1
+}
+
+
+### Obtener todos los Negocios
+GET http://localhost:3000/negocios?page=1&limit=100
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Content-Type: application/json
+
+### Buscar Negocio por nombre
+GET http://localhost:3000/negocios/search?nombre=Botica&page=1&limit=5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Content-Type: application/json
+
+### Buscar Negocio por propietario
+GET http://localhost:3000/negocios/search?propietario=jua&page=1&limit=5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Content-Type: application/json
+
+### Actualizar un Negocio
+PUT http://localhost:3000/negocios/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Content-Type: application/json
+
+{
+  "nombre": "Botica Salud y Vida",
+  "propietario": "Juan Pérez",
+  "direccion": "Av. Curaciones Norte 456",
+  "telefono": "987654322",
+  "estatus": false,
+  "id_categoria_negocio": 1
+}
+
+### Obtener todas las categorías
+GET http://localhost:3000/productos/categorias
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+
+### Crear una categoría de producto
+POST http://localhost:3000/productos/categorias
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Content-Type: application/json
+
+{
+  "nombre": "Medicamentos"
+}
+
+### Actualizar una categoría
+PUT http://localhost:3000/productos/categorias/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Content-Type: application/json
+
+{
+  "nombre": "Medicamentos Recetados"
+}
+
+
+### Obtener todos los productos de un negocio
+GET http://localhost:3000/productos/negocio/2?page=1&limit=10
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Content-Type: application/json
+
+### Buscar productos por nombre
+GET http://localhost:3000/productos?nombre=ibu&id_negocio=2&page=1&limit=10
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Content-Type: application/json
+
+
+### Crear un nuevo producto
+POST http://localhost:3000/productos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Content-Type: application/json
+
+{
+  "nombre": "Ibuprofeno 400mg",
+  "descripcion": "Analgésico y antiinflamatorio",
+  "precio": 12.50,
+  "stock": 50,
+  "tipo_unidad": "Caja", 
+  "id_negocio": 2,
+  "id_categoria_producto": 1
+}
+
+### Actualizar un producto
+PUT http://localhost:3000/productos/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Content-Type: application/json
+
+{
+  "nombre": "Paracetamol 500mg",
+  "descripcion": "Analgésico y antipirético",
+  "sku": "PAR500-ABC",
+  "precio": 10.00,
+  "stock": 50,
+  "tipo_unidad": "Caja",
+  "id_negocio": 2,
+  "estatus": true,
+  "fecha_expiracion": "2025-11-30T00:00:00.000Z",
+  "id_categoria_producto": 1
+}
+
+
+### 📌 Crear una venta
+POST http://localhost:3000/ventas
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Content-Type: application/json
+
+{
+    "id_negocio": 1,
+    "metodo_pago": "tarjeta",
+    "productos": [
+        {
+            "id_producto": 1,
+            "cantidad": 3,
+            "precio": 10.00
+        },
+        {
+            "id_producto": 2,
+            "cantidad": 5,
+            "precio": 12.50
+        }
+    ]
+}
+
+### 📌 Obtener ventas de un negocio con paginación
+GET http://localhost:3000/ventas/negocio/1?page=1&limit=10
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+
+
+### 📌 Crear un proveedor
+POST http://localhost:3000/inventario/proveedores
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Content-Type: application/json
+
+{
+    "nombre": "Proveedor XYZ",
+    "ruc": "12345678901",
+    "contacto": "Juan Pérez",
+    "telefono": "987654321",
+    "direccion": "Av. Principal 123"
+}
+
+### 📌 Obtener todos los proveedores
+GET http://localhost:3000/inventario/proveedores
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+
+### 📌 Registrar una recepción de producto
+POST http://localhost:3000/inventario/recepciones
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Content-Type: application/json
+
+{
+    "id_producto": 1,
+    "cantidad": 50,
+    "precio_compra": 5.00,
+    "id_proveedor": 1
+}
+
+### 📌 Obtener todas las recepciones de productos
+GET http://localhost:3000/inventario/recepciones
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
