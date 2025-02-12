@@ -72,6 +72,8 @@ const login = async (req, res) => {
         const user = await prisma.usuarios.findUnique({ where: { email } });
         if (!user) return res.status(400).json({ message: 'Usuario no encontrado' });
 
+        if (!user.estatus) return res.status(403).json({ message: 'Cuenta inactiva. Contacta al administrador.' });
+
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Credenciales inválidas' });
 
@@ -88,7 +90,15 @@ const getProfile = async (req, res) => {
     try {
         const user = await prisma.usuarios.findUnique({
             where: { id_usuario: userId },
-            select: { nombre: true, email: true, role: true, id_negocio: true },
+            select: {
+                nombre: true,
+                email: true,
+                role: true,
+                id_negocio: true,
+                negocio: {
+                    select: { nombre: true }
+                }
+            },
         });
         if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
         res.json({ user });
@@ -99,10 +109,13 @@ const getProfile = async (req, res) => {
 };
 
 const updateProfile = async (req, res) => {
-    const { userId } = req.user;
-    const { nombre, email, password } = req.body;
+    const { userId } = req.params;
+    const { nombre, email, password, id_negocio, role, estatus } = req.body;
+
+    let id_usuario_int = parseInt(userId, 10);
+
     try {
-        const existingUser = await prisma.usuarios.findUnique({ where: { id_usuario: userId } });
+        const existingUser = await prisma.usuarios.findUnique({ where: { id_usuario: id_usuario_int } });
         if (!existingUser) return res.status(404).json({ message: 'Usuario no encontrado' });
 
         if (email && email !== existingUser.email) {
@@ -110,10 +123,10 @@ const updateProfile = async (req, res) => {
             if (emailExists) return res.status(400).json({ message: 'El email ya está en uso por otro usuario' });
         }
 
-        const data = { nombre, email };
+        const data = { nombre, email, id_negocio, role, estatus };
         if (password) data.password = await bcrypt.hash(password, 10);
 
-        const user = await prisma.usuarios.update({ where: { id_usuario: userId }, data });
+        const user = await prisma.usuarios.update({ where: { id_usuario: id_usuario_int }, data });
         res.json({ message: 'Perfil actualizado exitosamente', user });
     } catch (err) {
         console.error('Error al actualizar perfil:', err);
@@ -121,11 +134,13 @@ const updateProfile = async (req, res) => {
     }
 };
 
+
+
 // New method to get all users
 const getAllUsers = async (req, res) => {
     try {
         const users = await prisma.usuarios.findMany({
-            select: { nombre: true, email: true, role: true, id_negocio: true, estatus: true },
+            select: { id_usuario: true, nombre: true, email: true, role: true, id_negocio: true, estatus: true },
         });
         res.json({ status: 'success', users });
     } catch (err) {

@@ -57,8 +57,8 @@ const getNegocioBySearch = async (req, res) => {
             prisma.negocios.findMany({
                 where: finalWhereClause,
                 include: {
-                    productos: true, // Corrección del nombre de relación
-                    ventas: true     // Corrección del nombre de relación
+                    productos: true,
+                    ventas: true
                 },
                 skip,
                 take: parsedLimit,
@@ -107,7 +107,7 @@ const getAllNegociosCategoria = async (req, res) => {
             orderBy: { nombre: 'asc' }
         });
 
-        res.json({ data: categoriasNegocio });
+        res.json(categoriasNegocio);
     } catch (err) {
         console.error('Error en búsqueda categorías de negocios:', err);
         res.status(500).json({ message: 'Error al buscar negocios', error: err.message });

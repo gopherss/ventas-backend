@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const helmet = require('helmet');
 const authRoutes = require('./routes/authRoutes');
 const negocioRoutes = require('./routes/negocioRoutes');
 const productoRoutes = require('./routes/productoRoutes');
@@ -12,14 +11,10 @@ const app = express();
 app.set('PORT', process.env.PORT || 3000);
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(helmet());
-
 
 const corsOptions = {
-    origin: '*',
+    origin: 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));

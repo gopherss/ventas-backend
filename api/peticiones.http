@@ -19,13 +19,18 @@ Content-Type: application/json
   "password": "root123"
 }
 
+# Respuesta
+# {"message":"Login exitoso","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MDg3MDIzLCJleHAiOjE3MzkxNzM0MjN9.bvEOkFQO1L2geeOx2quJt2RcWE3fN3rqnuwMNCYnYTU"}
+
+
 ### Registro de Usuario Admin
 POST http://localhost:3000/auth/register
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5Mjk2MjQwLCJleHAiOjE3MzkzODI2NDB9._3wYnFvqs91D6YNdMdxwTQrJhSrxPa4IWkKcEXf_9PY
 Content-Type: application/json
 
 {
-  "nombre": "Admin User",
-  "email": "admin@negocio.com",
+  "nombre": "AdminFinal",
+  "email": "adminfinal@negocio.com",
   "password": "admin123",
   "role": "ADMIN",
   "id_negocio": 2
@@ -37,7 +42,7 @@ Content-Type: application/json
 
 {
   "email": "admin@negocio.com",
-  "password": "admin123"
+  "password": "hacker123456"
 }
 
 ### Registro de Usuario User
@@ -63,27 +68,39 @@ Content-Type: application/json
 
 ###  Obtiene el perfil del usuario autenticado.
 GET http://localhost:3000/auth/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTkwMzI3LCJleHAiOjE3MzkwNzY3Mjd9.m2nAVxmkDladqPs566YA8WNbn0CNB3RTfqUmFjRcaso
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MzExMTU4LCJleHAiOjE3MzkzOTc1NTh9.amMIZABavhyqRs_7oXs2emr5G9IntxPGWf0qnJlOId8
 Content-Type: application/json
+# respuests
+# {"user":{"nombre":"Root Sandro","email":"root@negocio.com","role":"ROOT","id_negocio":1}}
 
 ###  Obtiene todos los perfiles de usuarios.
 GET http://localhost:3000/auth/list-users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MDY0Njk5LCJleHAiOjE3MzkxNTEwOTl9.yh544BWsszn2C3tp4MIEEb0708szojMDVPPHVCQhGm0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MzEzNzI2LCJleHAiOjE3Mzk0MDAxMjZ9.e0YyeAukwiaA0N1Db3NAn3t9vxUfn_1jY_Q9ZvxPUgs
 Content-Type: application/json
+# respuesta
+# {"status":"success","users":[{"nombre":"Root Sandro","email":"root@negocio.com","role":"ROOT","id_negocio":1,"estatus":true},{"nombre":"Admin User","email":"admin@negocio.com","role":"ADMIN","id_negocio":2,"estatus":true}]}
 
 
 ### Permite actualizar el perfil del usuario autenticado.
-PUT http://localhost:3000/auth/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTkwMzI3LCJleHAiOjE3MzkwNzY3Mjd9.m2nAVxmkDladqPs566YA8WNbn0CNB3RTfqUmFjRcaso
+PUT http://localhost:3000/auth/profile/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5Mjk2MjQwLCJleHAiOjE3MzkzODI2NDB9._3wYnFvqs91D6YNdMdxwTQrJhSrxPa4IWkKcEXf_9PY
+Content-Type: application/json
+
 {
-  "nombre": "Juan Pérez Modificado",
-  "email": "nuevoemail@example.com",
-  "password": "NuevoPasswordSeguro123"
+  "nombre": "AdminES",
+  "email": "admin@negocio.com",
+  "password": "hacker123456",
+  "id_negocio":2,
+  "role":"ADMIN",
+  "estatus":false
 }
+
+# respuesta
+
 
 ### crear una categoría de negocio:
 POST http://localhost:3000/negocios/categoria
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MzM1NTQwLCJleHAiOjE3Mzk0MjE5NDB9.eAxlkGB7Ga1I_edep9qGKhIbMxCM33F5bblFxW_GePE
 Content-Type: application/json
 
 {
@@ -92,8 +109,10 @@ Content-Type: application/json
 
 ### obtener todas las categorías de negocio:
 GET http://localhost:3000/negocios/categoria
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MTIyNDU1LCJleHAiOjE3MzkyMDg4NTV9.kJXurwTmeUsKDflX-GgrKnuvEPc99okbERvQlf1reWk
 Content-Type: application/json
+#respuesta
+#[{"id_categoria_negocio":7,"nombre":"Farmacia","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":2,"nombre":"Farmacia Salud","createdAt":"2025-02-07T05:23:12.874Z","updatedAt":"2025-02-07T05:52:26.808Z"},{"id_categoria_negocio":5,"nombre":"Ferretería","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":1,"nombre":"Ficticio","createdAt":"2025-02-07T04:48:09.210Z","updatedAt":"2025-02-07T05:49:50.250Z"},{"id_categoria_negocio":10,"nombre":"Gimnasio","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":9,"nombre":"Librería","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":11,"nombre":"Panadería","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":3,"nombre":"Restaurante","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":6,"nombre":"Supermercado","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":8,"nombre":"Tecnología","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":4,"nombre":"Tienda de Ropa","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":12,"nombre":"Veterinaria","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"}]
 
 
 ### actualizar una categoría de negocio:
@@ -122,8 +141,10 @@ Content-Type: application/json
 
 ### Obtener todos los Negocios
 GET http://localhost:3000/negocios?page=1&limit=100
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MTIyNDU1LCJleHAiOjE3MzkyMDg4NTV9.kJXurwTmeUsKDflX-GgrKnuvEPc99okbERvQlf1reWk
 Content-Type: application/json
+#respuesta
+#{"total":2,"page":1,"limit":100,"data":[{"id_negocio":2,"nombre":"Botica Salud y Vida","propietario":"Juan Pérez","direccion":"Av. Curaciones Norte 456","telefono":"987654322","estatus":false,"id_categoria_negocio":1,"createdAt":"2025-02-07T05:52:53.292Z","updatedAt":"2025-02-07T05:53:53.838Z"},{"id_negocio":1,"nombre":"Negocio Ficticio Root","propietario":"Root User","direccion":"Calle Imaginaria 123","telefono":"123456789","estatus":true,"id_categoria_negocio":1,"createdAt":"2025-02-07T04:48:09.216Z","updatedAt":"2025-02-07T04:48:09.216Z"}],"pagination":{"totalPages":1,"hasNextPage":false,"hasPreviousPage":false}}
 
 ### Buscar Negocio por nombre
 GET http://localhost:3000/negocios/search?nombre=Botica&page=1&limit=5
@@ -149,17 +170,17 @@ Content-Type: application/json
   "id_categoria_negocio": 1
 }
 
-### Obtener todas las categorías
+### Obtener todas las categorías de productos
 GET http://localhost:3000/productos/categorias
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
 
 ### Crear una categoría de producto
 POST http://localhost:3000/productos/categorias
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MzM1NTQwLCJleHAiOjE3Mzk0MjE5NDB9.eAxlkGB7Ga1I_edep9qGKhIbMxCM33F5bblFxW_GePE
 Content-Type: application/json
 
 {
-  "nombre": "Medicamentos"
+  "nombre": "Capsulas"
 }
 
 ### Actualizar una categoría
