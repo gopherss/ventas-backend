@@ -82,8 +82,12 @@ const searchByNameProductos = async (req, res) => {
 
 //Obtener todas las categorías de productos
 const getCategoriasProducto = async (req, res) => {
+    const { idNegocio } = req.params; // Obtener el ID del negocio desde los parámetros de la ruta
+
     try {
-        const categorias = await prisma.categoriaProducto.findMany();
+        const categorias = await prisma.categoriaProducto.findMany({
+            where: { id_negocio: Number(idNegocio) }, // Filtrar por negocio
+        });
         res.status(200).json(categorias);
     } catch (err) {
         res.status(500).json({ message: "Error al obtener categorías", error: err.message });
@@ -92,6 +96,7 @@ const getCategoriasProducto = async (req, res) => {
 
 //Crear una nueva categoría de producto
 const createCategoriaProducto = async (req, res) => {
+    const { idNegocio } = req.params; // Obtener el ID del negocio desde los parámetros de la ruta
     const { nombre } = req.body;
 
     if (!nombre) {
@@ -100,18 +105,24 @@ const createCategoriaProducto = async (req, res) => {
 
     try {
         const categoria = await prisma.categoriaProducto.create({
-            data: { nombre }
+            data: {
+                nombre,
+                id_negocio: Number(idNegocio), // Asociar la categoría al negocio
+            },
         });
 
         res.status(201).json(categoria);
     } catch (err) {
+        if (err.code === "P2002") { // Código de error de Prisma para violación de restricción única
+            return res.status(400).json({ message: "El nombre de la categoría ya está en uso" });
+        }
         res.status(500).json({ message: "Error al crear la categoría", error: err.message });
     }
 };
 
 //Actualizar una categoría de producto
 const updateCategoriaProducto = async (req, res) => {
-    const { id } = req.params;
+    const { idNegocio, id } = req.params; // Obtener el ID del negocio y el ID de la categoría
     const { nombre } = req.body;
 
     if (!nombre) {
@@ -120,8 +131,11 @@ const updateCategoriaProducto = async (req, res) => {
 
     try {
         const categoriaActualizada = await prisma.categoriaProducto.update({
-            where: { id_categoria_producto: Number(id) },
-            data: { nombre }
+            where: {
+                id_categoria_producto: Number(id),
+                id_negocio: Number(idNegocio), // Asegurarse de que la categoría pertenezca al negocio
+            },
+            data: { nombre },
         });
 
         res.status(200).json(categoriaActualizada);

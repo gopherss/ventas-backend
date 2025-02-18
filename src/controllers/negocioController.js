@@ -95,6 +95,13 @@ const createCategoriaNegocio = async (req, res) => {
 
         return res.status(201).json({ message: 'Categoría creada exitosamente', categoria: newCategoria });
     } catch (err) {
+        console.log(err);
+
+        // Manejo del error por duplicado
+        if (err.code === 'P2002') { // Prisma error de UNIQUE constraint
+            return res.status(400).json({ message: 'El nombre de la categoría ya existe' });
+        }
+
         return res.status(500).json({ message: 'Error al crear la categoría', error: err.message });
     }
 };

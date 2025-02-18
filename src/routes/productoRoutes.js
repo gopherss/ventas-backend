@@ -8,7 +8,7 @@ const {
     createCategoriaProducto,
     updateCategoriaProducto,
 } = require('../controllers/productoController');
-const { validateProducto, validateProductoId } = require('../validators/productoValidator');
+const { validateProducto, validateProductoId, validateCategoriaProductoId, validateCategoriaProducto } = require('../validators/productoValidator');
 const handleValidationErrors = require('../middlewares/validationMiddleware');
 const { authenticate } = require('../middlewares/authMiddleware');
 const authorizeRole = require('../middlewares/authorizeRole');
@@ -24,8 +24,9 @@ router.put('/:id', authenticate, authorizeRole(root, admin, user), validateProdu
 
 
 // Rutas de categorías de productos
-router.get("/categorias", authenticate, authorizeRole(root, admin, user), getCategoriasProducto);
-router.post("/categorias", authenticate, authorizeRole(root, admin, user), createCategoriaProducto);
-router.put("/categorias/:id", authenticate, authorizeRole(root, admin, user), updateCategoriaProducto);
+router.get("/negocio/:idNegocio/categorias", authenticate, authorizeRole(root, admin, user), getCategoriasProducto);
+router.post("/negocio/:idNegocio/categorias", authenticate, authorizeRole(root, admin, user), validateCategoriaProducto, handleValidationErrors, createCategoriaProducto);
+router.put("/negocio/:idNegocio/categorias/:id", authenticate, authorizeRole(root, admin, user), validateCategoriaProductoId, handleValidationErrors, updateCategoriaProducto);
+
 
 module.exports = router;

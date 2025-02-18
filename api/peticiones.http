@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "nombre": "Root Sandro",
   "email": "root@negocio.com",
-  "password": "root123",
+  "password": "root123456",
   "role": "ROOT",
   "estado": true
 }
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 {
   "email": "root@negocio.com",
-  "password": "root123"
+  "password": "root123456"
 }
 
 # Respuesta
@@ -75,7 +75,7 @@ Content-Type: application/json
 
 ###  Obtiene todos los perfiles de usuarios.
 GET http://localhost:3000/auth/list-users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MzEzNzI2LCJleHAiOjE3Mzk0MDAxMjZ9.e0YyeAukwiaA0N1Db3NAn3t9vxUfn_1jY_Q9ZvxPUgs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NDcyNTU2LCJleHAiOjE3Mzk1NTg5NTZ9.pk6vaEY2mE8UIZy81tp6rRgjGKG9zGLS9cTLuvxhqx8
 Content-Type: application/json
 # respuesta
 # {"status":"success","users":[{"nombre":"Root Sandro","email":"root@negocio.com","role":"ROOT","id_negocio":1,"estatus":true},{"nombre":"Admin User","email":"admin@negocio.com","role":"ADMIN","id_negocio":2,"estatus":true}]}
@@ -100,7 +100,7 @@ Content-Type: application/json
 
 ### crear una categoría de negocio:
 POST http://localhost:3000/negocios/categoria
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MzM1NTQwLCJleHAiOjE3Mzk0MjE5NDB9.eAxlkGB7Ga1I_edep9qGKhIbMxCM33F5bblFxW_GePE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzM1OTI2LCJleHAiOjE3Mzk4MjIzMjZ9.xZV8eg5HSTBjzCg5yCAlCbt-Y0BJdQ2k888SvRC7dE4
 Content-Type: application/json
 
 {
@@ -126,16 +126,16 @@ Content-Type: application/json
 
 ### Registrar un nuevo Negocio
 POST http://localhost:3000/negocios
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM4OTAzNjk4LCJleHAiOjE3Mzg5OTAwOTh9.RnRuFdtGRmi4rGBQlbg0DFdcWbJuMBZBpxyFRp0DX_g
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzM1OTI2LCJleHAiOjE3Mzk4MjIzMjZ9.xZV8eg5HSTBjzCg5yCAlCbt-Y0BJdQ2k888SvRC7dE4
 Content-Type: application/json
 
 {
-  "nombre": "Botica Curaciones",
-  "propietario": "Juan Pérez",
-  "direccion": "Av. Las Curaciones 123",
-  "telefono": "987654321",
+  "nombre": "Mundo TEC.",
+  "propietario": "Tecnopata",
+  "direccion": "Av. Las tec list",
+  "telefono": "123456789",
   "estatus": true,
-  "id_categoria_negocio": 1
+  "id_categoria_negocio": 10
 }
 
 
@@ -167,46 +167,61 @@ Content-Type: application/json
   "direccion": "Av. Curaciones Norte 456",
   "telefono": "987654322",
   "estatus": false,
-  "id_categoria_negocio": 1
+  "id_categoria_negocio": 1  
 }
 
 ### Obtener todas las categorías de productos
-GET http://localhost:3000/productos/categorias
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+GET http://localhost:3000/productos/negocio/2/categorias
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzY0NTAxLCJleHAiOjE3Mzk4NTA5MDF9.6OPFYJQJQCxr4-vL0_jYd64bXBkq2MKk-eDtasIPCho
+
+# respuesta
+# [{"id_categoria_producto": 1,"nombre": "Pastillas","id_negocio": 2,"createdAt": "2025-02-17T04:28:36.886Z","updatedAt": "2025-02-17T04:46:20.491Z"},  {    "id_categoria_producto": 2,    "nombre": "Vitaminas Bebibles",    "id_negocio": 2,    "createdAt": "2025-02-17T04:28:56.126Z",    "updatedAt": "2025-02-17T04:53:48.019Z"  },]
 
 ### Crear una categoría de producto
-POST http://localhost:3000/productos/categorias
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MzM1NTQwLCJleHAiOjE3Mzk0MjE5NDB9.eAxlkGB7Ga1I_edep9qGKhIbMxCM33F5bblFxW_GePE
+POST http://localhost:3000/productos/negocio/2/categorias
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzY0NTAxLCJleHAiOjE3Mzk4NTA5MDF9.6OPFYJQJQCxr4-vL0_jYd64bXBkq2MKk-eDtasIPCho
 Content-Type: application/json
 
 {
-  "nombre": "Capsulas"
+  "nombre": "Jabones Aromatizados"
 }
 
-### Actualizar una categoría
-PUT http://localhost:3000/productos/categorias/1
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+# respuesta
+# {"id_categoria_producto":7,"nombre":"Jabones Aromatizados","id_negocio":2,"createdAt":"2025-02-17T04:56:33.205Z","updatedAt":"2025-02-17T04:56:33.205Z"}
+
+### Actualizar una categoría de producto
+PUT http://localhost:3000/productos/negocio/2/categorias/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzY0NTAxLCJleHAiOjE3Mzk4NTA5MDF9.6OPFYJQJQCxr4-vL0_jYd64bXBkq2MKk-eDtasIPCho
 Content-Type: application/json
 
 {
-  "nombre": "Medicamentos Recetados"
+  "nombre": "Vitaminas"
 }
+
+# respuesta
+# {"id_categoria_producto":2,"nombre":"Vitaminas","id_negocio":2,"createdAt":"2025-02-17T04:28:56.126Z","updatedAt":"2025-02-17T04:57:06.921Z"}
 
 
 ### Obtener todos los productos de un negocio
 GET http://localhost:3000/productos/negocio/2?page=1&limit=10
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzY0NTAxLCJleHAiOjE3Mzk4NTA5MDF9.6OPFYJQJQCxr4-vL0_jYd64bXBkq2MKk-eDtasIPCho
 Content-Type: application/json
+
+# respuesta
+# {"total":1,"page":1,"limit":10,"data":[{"id_producto":1,"nombre":"Paracetamol 500mg","descripcion":"Analgésico y antipirético","sku":"PAR500-ABC","precio":10,"stock":50,"tipo_unidad":"Caja","estatus":true,"fecha_expiracion":"2025-11-30T00:00:00.000Z","id_negocio":2,"createdBy":1,"id_categoria_producto":1,"createdAt":"2025-02-17T18:48:00.366Z","updatedAt":"2025-02-17T18:53:32.244Z","categoriaProducto":{"id_categoria_producto":1,"nombre":"PastillasN","id_negocio":2,"createdAt":"2025-02-17T04:28:36.886Z","updatedAt":"2025-02-17T05:10:09.785Z"},"negocio":{"id_negocio":2,"nombre":"Botica Sana","propietario":"Juan Perez","direccion":"Av. los pajaros","telefono":"986532741","estatus":true,"id_categoria_negocio":2,"createdAt":"2025-02-17T04:23:30.503Z","updatedAt":"2025-02-17T04:23:30.503Z"}}]}
+
 
 ### Buscar productos por nombre
-GET http://localhost:3000/productos?nombre=ibu&id_negocio=2&page=1&limit=10
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+GET http://localhost:3000/productos?nombre=Paracetamol&id_negocio=2&page=1&limit=10
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzY0NTAxLCJleHAiOjE3Mzk4NTA5MDF9.6OPFYJQJQCxr4-vL0_jYd64bXBkq2MKk-eDtasIPCho
 Content-Type: application/json
 
+#respuesta
+# {"productos":[{"id_producto":1,"nombre":"Paracetamol 500mg","precio":10,"stock":50,"id_negocio":2}],"total":1,"page":1,"limit":10,"totalPages":1}
 
 ### Crear un nuevo producto
 POST http://localhost:3000/productos
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzY0NTAxLCJleHAiOjE3Mzk4NTA5MDF9.6OPFYJQJQCxr4-vL0_jYd64bXBkq2MKk-eDtasIPCho
 Content-Type: application/json
 
 {
@@ -219,13 +234,16 @@ Content-Type: application/json
   "id_categoria_producto": 1
 }
 
+# Respuesta
+# {"id_producto":2,"nombre":"Ibuprofeno 400mg","descripcion":"Analgésico y antiinflamatorio","sku":null,"precio":12.5,"stock":100,"tipo_unidad":"Caja","estatus":true,"fecha_expiracion":null,"id_negocio":2,"createdBy":1,"id_categoria_producto":1,"createdAt":"2025-02-17T19:16:12.018Z","updatedAt":"2025-02-17T19:16:12.091Z"}
+
 ### Actualizar un producto
 PUT http://localhost:3000/productos/1
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczODk0NDE0NCwiZXhwIjoxNzM5MDMwNTQ0fQ.kCJaO2pz3bC1xUWIZhdCx8-x4FnGljcJzvz3wVdFrJY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzY0NTAxLCJleHAiOjE3Mzk4NTA5MDF9.6OPFYJQJQCxr4-vL0_jYd64bXBkq2MKk-eDtasIPCho
 Content-Type: application/json
 
 {
-  "nombre": "Paracetamol 500mg",
+  "nombre": "Paracetamol 100mg",
   "descripcion": "Analgésico y antipirético",
   "sku": "PAR500-ABC",
   "precio": 10.00,
@@ -237,6 +255,8 @@ Content-Type: application/json
   "id_categoria_producto": 1
 }
 
+# respuesta
+# {"message":"Producto actualizado correctamente","producto":{"id_producto":1,"nombre":"Paracetamol 100mg","descripcion":"Analgésico y antipirético","sku":"PAR500-ABC","precio":10,"stock":50,"tipo_unidad":"Caja","estatus":true,"fecha_expiracion":"2025-11-30T00:00:00.000Z","id_negocio":2,"createdBy":1,"id_categoria_producto":1,"createdAt":"2025-02-17T18:48:00.366Z","updatedAt":"2025-02-17T19:16:43.254Z"}}
 
 ### 📌 Crear una venta
 POST http://localhost:3000/ventas

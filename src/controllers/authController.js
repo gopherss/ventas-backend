@@ -134,13 +134,22 @@ const updateProfile = async (req, res) => {
     }
 };
 
-
-
-// New method to get all users
 const getAllUsers = async (req, res) => {
     try {
         const users = await prisma.usuarios.findMany({
-            select: { id_usuario: true, nombre: true, email: true, role: true, id_negocio: true, estatus: true },
+            select: {
+                id_usuario: true,
+                nombre: true,
+                email: true,
+                role: true,
+                id_negocio: true,
+                estatus: true,
+                negocio: {
+                    select: {
+                        nombre: true
+                    }
+                }
+            },
         });
         res.json({ status: 'success', users });
     } catch (err) {

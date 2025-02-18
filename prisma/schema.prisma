@@ -14,19 +14,20 @@ datasource db {
 }
 
 model Negocios {
-  id_negocio           Int              @id @default(autoincrement())
+  id_negocio           Int                 @id @default(autoincrement())
   nombre               String
   propietario          String
   direccion            String?
   telefono             String?
-  estatus              Boolean          @default(true)
+  estatus              Boolean             @default(true)
   id_categoria_negocio Int
   productos            Productos[]
   ventas               Ventas[]
   usuarios             Usuarios[]
-  categoriaNegocio     CategoriaNegocio @relation(fields: [id_categoria_negocio], references: [id_categoria_negocio])
-  createdAt            DateTime         @default(now()) // Fecha de creación
-  updatedAt            DateTime         @updatedAt // Fecha de actualización automática
+  categoriaNegocio     CategoriaNegocio    @relation(fields: [id_categoria_negocio], references: [id_categoria_negocio])
+  createdAt            DateTime            @default(now()) // Fecha de creación
+  updatedAt            DateTime            @updatedAt // Fecha de actualización automática
+  CategoriaProducto    CategoriaProducto[]
 
   @@index([nombre])
   @@index([propietario])
@@ -67,7 +68,9 @@ model Productos {
 model CategoriaProducto {
   id_categoria_producto Int         @id @default(autoincrement())
   nombre                String      @unique
+  id_negocio            Int
   productos             Productos[]
+  negocio               Negocios    @relation(fields: [id_negocio], references: [id_negocio])
   createdAt             DateTime    @default(now())
   updatedAt             DateTime    @updatedAt
 

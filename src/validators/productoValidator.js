@@ -21,4 +21,27 @@ const validateProductoId = [
         .withMessage('El ID del producto debe ser un número entero'),
 ];
 
-module.exports = { validateProducto, validateProductoId };
+// Validación para crear una categoría
+const validateCategoriaProducto = [
+    body('nombre')
+        .notEmpty()
+        .withMessage('El nombre de la categoría es obligatorio'),
+];
+
+// Validación para actualizar una categoría
+const validateCategoriaProductoId = [
+    param('id')
+        .isInt()
+        .withMessage('El ID de la categoría debe ser un número entero'),
+    param('idNegocio')
+        .isInt()
+        .withMessage('El ID del negocio debe ser un número entero'),
+    body('nombre')
+        .notEmpty()
+        .withMessage('El nombre de la categoría es obligatorio'),
+];
+
+module.exports = {
+    validateProducto, validateProductoId,
+    validateCategoriaProducto, validateCategoriaProductoId
+};

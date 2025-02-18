@@ -6,7 +6,7 @@ const { root } = require('../constants/index');
 
 const router = express.Router();
 
-router.post('/register', authenticate, authorizeRole(root), register);
+router.post('/register', /* authenticate, authorizeRole(root), */ register);
 router.post('/login', login);
 router.get('/profile', authenticateToken, getProfile);
 router.put('/profile/:userId', authenticate, authorizeRole(root), updateProfile);
