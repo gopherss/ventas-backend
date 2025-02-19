@@ -15,8 +15,11 @@ const getProductos = async (req, res) => {
             skip: (page - 1) * limit,
             take: parseInt(limit),
             include: {
-                categoriaProducto: true,
-                negocio: true
+                categoriaProducto: {
+                    select: {
+                        nombre: true
+                    }
+                }
             }
         });
 

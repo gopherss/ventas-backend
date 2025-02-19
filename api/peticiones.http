@@ -109,7 +109,7 @@ Content-Type: application/json
 
 ### obtener todas las categorías de negocio:
 GET http://localhost:3000/negocios/categoria
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5MTIyNDU1LCJleHAiOjE3MzkyMDg4NTV9.kJXurwTmeUsKDflX-GgrKnuvEPc99okbERvQlf1reWk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5OTM1NTExLCJleHAiOjE3NDAwMjE5MTF9.37s-TKfhOIkWw3weG334MEBopB2GNxKczMqRF3XjOF8
 Content-Type: application/json
 #respuesta
 #[{"id_categoria_negocio":7,"nombre":"Farmacia","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":2,"nombre":"Farmacia Salud","createdAt":"2025-02-07T05:23:12.874Z","updatedAt":"2025-02-07T05:52:26.808Z"},{"id_categoria_negocio":5,"nombre":"Ferretería","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":1,"nombre":"Ficticio","createdAt":"2025-02-07T04:48:09.210Z","updatedAt":"2025-02-07T05:49:50.250Z"},{"id_categoria_negocio":10,"nombre":"Gimnasio","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":9,"nombre":"Librería","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":11,"nombre":"Panadería","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":3,"nombre":"Restaurante","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":6,"nombre":"Supermercado","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":8,"nombre":"Tecnología","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":4,"nombre":"Tienda de Ropa","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"},{"id_categoria_negocio":12,"nombre":"Veterinaria","createdAt":"2025-02-07T06:10:06.000Z","updatedAt":"2025-02-07T06:10:06.000Z"}]
@@ -204,7 +204,7 @@ Content-Type: application/json
 
 ### Obtener todos los productos de un negocio
 GET http://localhost:3000/productos/negocio/2?page=1&limit=10
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzY0NTAxLCJleHAiOjE3Mzk4NTA5MDF9.6OPFYJQJQCxr4-vL0_jYd64bXBkq2MKk-eDtasIPCho
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5OTM1NTExLCJleHAiOjE3NDAwMjE5MTF9.37s-TKfhOIkWw3weG334MEBopB2GNxKczMqRF3XjOF8
 Content-Type: application/json
 
 # respuesta
@@ -221,18 +221,20 @@ Content-Type: application/json
 
 ### Crear un nuevo producto
 POST http://localhost:3000/productos
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzY0NTAxLCJleHAiOjE3Mzk4NTA5MDF9.6OPFYJQJQCxr4-vL0_jYd64bXBkq2MKk-eDtasIPCho
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5ODUzMjI2LCJleHAiOjE3Mzk5Mzk2MjZ9.t_oB9kC9UQI3KfYfpXyoU4LoFRMzBk8hfJ2JMfjB3sU
 Content-Type: application/json
 
 {
-  "nombre": "Ibuprofeno 400mg",
-  "descripcion": "Analgésico y antiinflamatorio",
-  "precio": 12.50,
-  "stock": 50,
-  "tipo_unidad": "Caja", 
-  "id_negocio": 2,
-  "id_categoria_producto": 1
+    "nombre": "Jarabe Mucolítico Avanzado",
+    "descripcion": "Disuelve la mucosidad y facilita su expulsión para una mejor respiración.",
+    "precio": 22.50,
+    "stock": 11,
+    "tipo_unidad": "Caja",
+    "id_negocio": 2,
+    "id_categoria_producto": 4
 }
+
+
 
 # Respuesta
 # {"id_producto":2,"nombre":"Ibuprofeno 400mg","descripcion":"Analgésico y antiinflamatorio","sku":null,"precio":12.5,"stock":100,"tipo_unidad":"Caja","estatus":true,"fecha_expiracion":null,"id_negocio":2,"createdBy":1,"id_categoria_producto":1,"createdAt":"2025-02-17T19:16:12.018Z","updatedAt":"2025-02-17T19:16:12.091Z"}
