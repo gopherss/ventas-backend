@@ -3,24 +3,28 @@ const prisma = require('../prisma/prismaClient');
 // Obtener todos los productos de un negocio
 const getProductos = async (req, res) => {
     const { idNegocio } = req.params;
-    const { page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 10, search } = req.query;
 
     try {
-        const total = await prisma.productos.count({
-            where: { id_negocio: parseInt(idNegocio) }
-        });
+        const whereCondition = {
+            id_negocio: parseInt(idNegocio),
+            ...(search && {
+                OR: [
+                    { nombre: { contains: search.toLowerCase() } },
+                    { descripcion: { contains: search.toLowerCase() } }
+                ],
+            }),
+        };
+
+        const total = await prisma.productos.count({ where: whereCondition });
 
         const productos = await prisma.productos.findMany({
-            where: { id_negocio: parseInt(idNegocio) },
-            skip: (page - 1) * limit,
+            where: whereCondition,
+            skip: (parseInt(page) - 1) * parseInt(limit),
             take: parseInt(limit),
             include: {
-                categoriaProducto: {
-                    select: {
-                        nombre: true
-                    }
-                }
-            }
+                categoriaProducto: { select: { nombre: true } },
+            },
         });
 
         res.json({
@@ -30,56 +34,7 @@ const getProductos = async (req, res) => {
             data: productos,
         });
     } catch (err) {
-        res.status(500).json({ message: 'Error al obtener productos', error: err.message });
-    }
-};
-
-// Buscar Productos por nombre
-const searchByNameProductos = async (req, res) => {
-    const { nombre, id_negocio, page = 1, limit = 10 } = req.query;
-
-    if (!id_negocio) {
-        return res.status(400).json({ message: 'El id_negocio es requerido' });
-    }
-
-    try {
-        const productos = await prisma.productos.findMany({
-            where: {
-                nombre: {
-                    contains: nombre?.toLowerCase(),
-                },
-                id_negocio: Number(id_negocio),
-            },
-            skip: (page - 1) * Number(limit),
-            take: Number(limit),
-            select: {
-                id_producto: true,
-                nombre: true,
-                precio: true,
-                stock: true,
-                id_negocio: true,
-            },
-        });
-
-        const total = await prisma.productos.count({
-            where: {
-                nombre: {
-                    contains: nombre?.toLowerCase(),
-                },
-                id_negocio: Number(id_negocio),
-            },
-        });
-
-        res.json({
-            productos,
-            total,
-            page: Number(page),
-            limit: Number(limit),
-            totalPages: Math.ceil(total / limit),
-        });
-    } catch (err) {
-        console.error('Error al buscar productos:', err);
-        res.status(500).json({ message: 'Error al buscar productos', error: err.message });
+        res.status(500).json({ message: "Error al obtener productos", error: err.message });
     }
 };
 
@@ -226,7 +181,6 @@ const updateProducto = async (req, res) => {
 
 module.exports = {
     getProductos,
-    searchByNameProductos,
     getCategoriasProducto,
     createCategoriaProducto,
     updateCategoriaProducto,

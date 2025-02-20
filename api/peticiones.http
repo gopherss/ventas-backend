@@ -203,21 +203,12 @@ Content-Type: application/json
 
 
 ### Obtener todos los productos de un negocio
-GET http://localhost:3000/productos/negocio/2?page=1&limit=10
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5OTM1NTExLCJleHAiOjE3NDAwMjE5MTF9.37s-TKfhOIkWw3weG334MEBopB2GNxKczMqRF3XjOF8
+GET http://localhost:3000/productos/negocio/2?page=1&limit=10&search=Anti
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0MDAyNTY2OSwiZXhwIjoxNzQwMTEyMDY5fQ.U_Di8z4xG9eHSOROz4DvUjFX8fKWEYDAlHhJPzajjDA
 Content-Type: application/json
 
 # respuesta
 # {"total":1,"page":1,"limit":10,"data":[{"id_producto":1,"nombre":"Paracetamol 500mg","descripcion":"Analgésico y antipirético","sku":"PAR500-ABC","precio":10,"stock":50,"tipo_unidad":"Caja","estatus":true,"fecha_expiracion":"2025-11-30T00:00:00.000Z","id_negocio":2,"createdBy":1,"id_categoria_producto":1,"createdAt":"2025-02-17T18:48:00.366Z","updatedAt":"2025-02-17T18:53:32.244Z","categoriaProducto":{"id_categoria_producto":1,"nombre":"PastillasN","id_negocio":2,"createdAt":"2025-02-17T04:28:36.886Z","updatedAt":"2025-02-17T05:10:09.785Z"},"negocio":{"id_negocio":2,"nombre":"Botica Sana","propietario":"Juan Perez","direccion":"Av. los pajaros","telefono":"986532741","estatus":true,"id_categoria_negocio":2,"createdAt":"2025-02-17T04:23:30.503Z","updatedAt":"2025-02-17T04:23:30.503Z"}}]}
-
-
-### Buscar productos por nombre
-GET http://localhost:3000/productos?nombre=Paracetamol&id_negocio=2&page=1&limit=10
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJST09UIiwiaWF0IjoxNzM5NzY0NTAxLCJleHAiOjE3Mzk4NTA5MDF9.6OPFYJQJQCxr4-vL0_jYd64bXBkq2MKk-eDtasIPCho
-Content-Type: application/json
-
-#respuesta
-# {"productos":[{"id_producto":1,"nombre":"Paracetamol 500mg","precio":10,"stock":50,"id_negocio":2}],"total":1,"page":1,"limit":10,"totalPages":1}
 
 ### Crear un nuevo producto
 POST http://localhost:3000/productos

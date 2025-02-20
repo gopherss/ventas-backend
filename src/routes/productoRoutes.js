@@ -1,7 +1,6 @@
 const express = require('express');
 const {
     getProductos,
-    searchByNameProductos,
     getCategoriasProducto,
     createProducto,
     updateProducto,
@@ -18,7 +17,6 @@ const router = express.Router();
 
 // Rutas de productos
 router.get('/negocio/:idNegocio', authenticate, authorizeRole(root, admin, user), getProductos);
-router.get('/', authenticate, authorizeRole(root, admin, user), searchByNameProductos);
 router.post('/', authenticate, authorizeRole(root, admin, user), validateProducto, handleValidationErrors, createProducto);
 router.put('/:id', authenticate, authorizeRole(root, admin, user), validateProductoId, validateProducto, handleValidationErrors, updateProducto);
 
