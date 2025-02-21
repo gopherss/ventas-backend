@@ -25,6 +25,9 @@ const getProductos = async (req, res) => {
             include: {
                 categoriaProducto: { select: { nombre: true } },
             },
+            orderBy: {
+                createdAt: 'desc'
+            }
         });
 
         res.json({
